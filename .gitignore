@@ -7,9 +7,9 @@
 /bazel-out
 
 # Node
-/node_modules
 npm-debug.log
 yarn-error.log
+/client/node_modules
 
 # IDEs and editors
 .idea/
@@ -29,7 +29,8 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/.angular/cache
+.angular/cache
+/client/.angular/cache
 .sass-cache/
 /connect.lock
 /coverage
