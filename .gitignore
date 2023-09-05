@@ -41,3 +41,15 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+package-lock.json
+node_modules
+dist
+.env
+*.log
+*log.
+logs/
+
+bin
+obj
+appsettings.json
