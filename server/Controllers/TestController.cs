@@ -14,4 +14,15 @@ public class TestController : ControllerBase
 
         return Ok(response);
     }
+
+    [HttpPost]
+    public IActionResult Post([FromBody] string message)
+    {
+        var response = new
+        {
+            message = $"Echoing received message: {message}"
+        };
+
+        return Ok(response);
+    }
 }
