@@ -1,2 +1,68 @@
-<p>login works!</p>
+<div class="container">
+  <h2 class="text-center">Login Component</h2>
 
+  <form #login="ngForm" (ngSubmit)="submit(login)">
+    <div class="form-group">
+      <label>Name</label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        [value]="socialUser ? socialUser.name : ''"
+        ngModel
+      />
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        id="email"
+        name="email"
+        type="text"
+        [value]="socialUser ? socialUser.email : ''"
+        ngModel
+      />
+    </div>
+    <button
+      *ngIf="isLoggedin === true"
+      type="button"
+      (click)="logOut()"
+      class="btn btn-primary"
+    >
+      LOG OUT
+    </button>
+    <button *ngIf="isLoggedin === false" type="submit" class="btn btn-primary">
+      SUBMIT
+    </button>
+  </form>
+
+  <div>
+    <div>
+      <asl-google-signin-button
+        type="standard"
+        size="medium"
+        shape="pill"
+        text="continue_with"
+        theme="filled_blue"
+      >
+      </asl-google-signin-button>
+    </div>
+  </div>
+</div>
+
+<div id="g_id_onload"
+data-client_id="233875227559-l3aiie0h6pu41jjgdouajloaqabepiiu.apps.googleusercontent.com"
+data-context="signin"
+data-ux_mode="popup"
+data-login_uri="http://localhost:4200/login"
+data-redirect_uri="http://localhost:4200/redirect"
+data-auto_prompt="false">
+</div>
+
+<div class="g_id_signin"
+     data-type="standard"
+     data-shape="pill"
+     data-theme="filled_blue"
+     data-text="continue_with"
+     data-size="large"
+     data-logo_alignment="left">
+</div>

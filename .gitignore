@@ -53,3 +53,5 @@ logs/
 bin
 obj
 appsettings.json
+.angular
+environments
