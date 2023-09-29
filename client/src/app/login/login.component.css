@@ -5,6 +5,23 @@
     align-items: center;
 }
 
+.status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
 form {
     margin: 1rem;
     width: 30%;

@@ -1,4 +1,10 @@
 <div class="container">
+  <div class="status">
+    <h1>{{status}}</h1>
+    <p *ngIf="token">token: {{token}}...</p>
+    <p *ngIf="name">name: {{name}}</p>
+    <p *ngIf="email">email: {{email}}</p>
+  </div>
   <h2 class="text-center">Login Component</h2>
 
   <form #login="ngForm" (ngSubmit)="submit(login)">
@@ -23,14 +29,26 @@
       />
     </div>
     <button
-      *ngIf="isLoggedin === true"
+      *ngIf="isLoggedinSocial === true"
       type="button"
-      (click)="logOut()"
+      (click)="logOutSocial()"
       class="btn btn-primary"
     >
       LOG OUT
     </button>
-    <button *ngIf="isLoggedin === false" type="submit" class="btn btn-primary">
+    <button
+      *ngIf="isLoggedinManual === true"
+      type="button"
+      (click)="logOutManual()"
+      class="btn btn-primary"
+    >
+      LOG OUT
+    </button>
+    <button
+      *ngIf="isLoggedinSocial === false && isLoggedinManual === false"
+      type="submit"
+      class="btn btn-primary"
+    >
       SUBMIT
     </button>
   </form>
@@ -49,20 +67,23 @@
   </div>
 </div>
 
-<div id="g_id_onload"
-data-client_id="233875227559-l3aiie0h6pu41jjgdouajloaqabepiiu.apps.googleusercontent.com"
-data-context="signin"
-data-ux_mode="popup"
-data-login_uri="http://localhost:4200/login"
-data-redirect_uri="http://localhost:4200/redirect"
-data-auto_prompt="false">
-</div>
+<!-- <button (click)="loginWithGoogle()">Manual Login</button> -->
 
-<div class="g_id_signin"
-     data-type="standard"
-     data-shape="pill"
-     data-theme="filled_blue"
-     data-text="continue_with"
-     data-size="large"
-     data-logo_alignment="left">
-</div>
+<!-- <div
+  id="g_id_onload"
+  data-client_id="233875227559-l3aiie0h6pu41jjgdouajloaqabepiiu.apps.googleusercontent.com"
+  data-context="signin"
+  data-ux_mode="popup"
+  data-login_uri="http://localhost:5001/api/gauth"
+  data-auto_prompt="false"
+></div>
+
+<div
+  class="g_id_signin"
+  data-type="standard"
+  data-shape="pill"
+  data-theme="filled_blue"
+  data-text="continue_with"
+  data-size="large"
+  data-logo_alignment="left"
+></div> -->
