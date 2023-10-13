@@ -42,18 +42,16 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-[Ww][Ii][Nn]32/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
+package-lock.json
+node_modules
+dist
+.env
+*.log
+*log.
+logs/
+
+bin
+obj
+appsettings.json
+.angular
+environments
