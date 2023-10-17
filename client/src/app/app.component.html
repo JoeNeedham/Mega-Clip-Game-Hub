@@ -1,5 +1,7 @@
-<div>
-    <h2>NAVBAR</h2>
+<div class="flex flex-col md:flex-row">
+  <app-navbar></app-navbar>
+  <div class="flex-1 md:w-full md:mx-auto">
+    <h1>Other content</h1>
+    <router-outlet></router-outlet>
+  </div>
 </div>
-
-<router-outlet></router-outlet>
