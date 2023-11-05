@@ -71,11 +71,20 @@ namespace User.Services
         }
 
         public UserProfile? GetUser(int id)
-        {   
+        {  
         // Use Entity Framework Core to query the database for the user with the given id
         var user = _context.Users.FirstOrDefault(u => u.Id == id);
 
         return user;
+        }
+
+        public void GetUsername(string username)
+        {  
+        // Use Entity Framework Core to query the database for the user with the given id
+            if (_context.Users.Any(u => u.Username == username))
+            {
+                throw new Exception("Username is already in use.");
+            }
         }
 
         public void UpdateUser(int userId, string newUsername, string newEmail, string newPasswordHash) // make sure these are optional

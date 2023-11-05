@@ -39,7 +39,6 @@ namespace User.Controllers
 
             try
             {
-
                 if (!_userService.IsPasswordValid(userData.PasswordHash))
                 {
                     return BadRequest("Password must include one uppercase character and one special character.");
@@ -81,6 +80,25 @@ namespace User.Controllers
                 };
 
                 return Ok(userDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"Bad request: {ex.Message}");
+            }
+        }
+        [HttpGet("get-username")]
+        public IActionResult GetUsername(string username)
+        {
+            try
+            {
+                _userService.GetUsername(username);
+
+                // if (username == null)
+                // {
+                //     return NotFound("User not found");
+                // }
+
+                return Ok("username available");
             }
             catch (Exception ex)
             {
