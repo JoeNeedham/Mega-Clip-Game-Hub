@@ -31,17 +31,14 @@ RUN npm install \
 # Final image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 
-# Set the working directory for .NET in the final image
-WORKDIR /app/server
+# Set the working directory
+WORKDIR /app
 
 # Copy the output from the .NET build stage
-COPY --from=build-dotnet /app/server/out .
+COPY --from=build-dotnet /app/server/out /app/server/out
 
-# Set the working directory for Node.js in the final image
-WORKDIR /app/client
-
-# Copy the output from the Node.js build stage
-COPY --from=build-node /app/client/dist .
+# Copy the Angular build output
+COPY --from=build-node /app/client/dist /app/client/dist
 
 # Expose the ports used by Angular and .NET
 EXPOSE 4200
