@@ -35,10 +35,10 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
 
 # Copy the contents of the server directory
-COPY --from=build-dotnet /app/server /app/server
+COPY --from=build-dotnet /server/out .
 
 # Copy the Angular build output
-COPY --from=build-node /app/client/dist /app/client/dist
+COPY --from=build-node /client/dist /client/dist
 
 # Expose the ports used by Angular and .NET
 EXPOSE 4200
