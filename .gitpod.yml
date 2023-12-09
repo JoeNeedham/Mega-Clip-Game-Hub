@@ -1,0 +1,13 @@
+# Image reference for the GitPod workspace
+image:
+  file: .gitpod.dockerfile
+
+# Ports to be exposed in the GitPod environment
+ports:
+  - port: 4200
+  - port: 5000
+
+# Extensions to be installed in the GitPod environment
+vscode:
+  extensions:
+    - angular.ng-template
