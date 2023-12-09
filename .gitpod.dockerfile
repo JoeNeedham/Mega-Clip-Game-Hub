@@ -34,8 +34,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0
 # Set the working directory
 WORKDIR /app
 
-# Copy the output from the .NET build stage
-COPY --from=build-dotnet /app/server/out /app/server/out
+# Copy the contents of the server directory
+COPY --from=build-dotnet /app/server /app/server
 
 # Copy the Angular build output
 COPY --from=build-node /app/client/dist /app/client/dist
@@ -45,4 +45,4 @@ EXPOSE 4200
 EXPOSE 5000
 
 # Start the application
-CMD ["dotnet", "mega-clip-game-hub-api.dll"]
+CMD ["dotnet", "server/out/mega-clip-game-hub-api.dll"]
