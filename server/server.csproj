@@ -4,6 +4,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ContainerImageName>mega-clip-game-hub-api</ContainerImageName>
+    <AssemblyName>mega-clip-game-hub-api</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
