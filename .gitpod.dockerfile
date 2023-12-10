@@ -1,48 +1,24 @@
-# .gitpod.dockerfile
-
-# Use the official Node.js 16 and .NET 7 SDK as the base image
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-dotnet
-FROM node:16 AS build-node
-
-# Set the working directory for .NET
-WORKDIR /app/server
-
-# Install the .NET SDK
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-       apt-transport-https \
-       unzip \
-    && curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 7.0 \
-    && ln -s $HOME/.dotnet/dotnet /usr/bin/dotnet
-
-# Copy the .NET project files to the container
-COPY server .
-
-# Build the .NET project
-RUN dotnet publish -c Release -o out
-
-# Set the working directory for Node.js
+# Stage 1: Build Angular application
+FROM node:16 AS angular-build
 WORKDIR /app/client
+COPY client/package*.json ./
+RUN npm install
+COPY client/ .
+RUN npm run build --prod
 
-# Install npm dependencies and build Angular
-RUN npm install \
-    && npm run build
+# Stage 2: Build .NET application
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS dotnet-build
+WORKDIR /app/server
+COPY server/*.csproj ./
+RUN dotnet restore
+COPY server/ .
+RUN dotnet build -c Release -o out
 
-# Final image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
-
-# Set the working directory
+# Stage 3: Create the final image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
 WORKDIR /app
+COPY --from=dotnet-build /app/server/out ./
+COPY --from=angular-build /app/client/dist ./wwwroot
 
-# Copy the contents of the server directory
-COPY --from=build-dotnet /server/out .
-
-# Copy the Angular build output
-COPY --from=build-node /client/dist /client/dist
-
-# Expose the ports used by Angular and .NET
-EXPOSE 4200
-EXPOSE 5000
-
-# Start the application
-CMD ["dotnet", "server/out/mega-clip-game-hub-api.dll"]
+# Set the entry point for the .NET application
+ENTRYPOINT ["dotnet", "mega-clip-game-hub-api.dll"]
