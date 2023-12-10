@@ -1,3 +1,8 @@
+# Install Git
+USER root
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/* && usermod -aG sudo gitpod
+USER gitpod
+
 # Stage 1: Build Angular application
 FROM node:16 AS angular-build
 WORKDIR /app/client
