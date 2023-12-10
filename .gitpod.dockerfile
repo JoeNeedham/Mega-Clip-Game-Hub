@@ -15,9 +15,9 @@ RUN which git
 
 WORKDIR /app/server
 COPY server/*.csproj ./
-RUN dotnet restore
+RUN dotnet restore --use-current-runtime
 COPY server/ .
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o out /app/server --use-current-runtime --self-contained false --no-restore
 
 # Stage 3: Create the final image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
