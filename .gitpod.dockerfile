@@ -1,17 +1,3 @@
-FROM ubuntu:latest
-
-# Install Git
-RUN apt-get update && apt-get install -yq \
-    git \
-    git-lfs \
-    sudo \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
-
-# Create the gitpod user. UID must be 33333.
-RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod
-
-USER gitpod
-
 # Stage 1: Build Angular application
 FROM node:16 AS angular-build
 WORKDIR /app/client
@@ -27,6 +13,9 @@ COPY server/*.csproj ./
 RUN dotnet restore
 COPY server/ .
 RUN dotnet publish -c Release -o out
+
+# Install Git
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 # Stage 3: Create the final image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
