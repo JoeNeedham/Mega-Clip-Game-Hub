@@ -8,14 +8,16 @@ RUN npm run build --prod
 
 # Stage 2: Build .NET application
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS dotnet-build
+
+# Install Git
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+RUN which git
+
 WORKDIR /app/server
 COPY server/*.csproj ./
 RUN dotnet restore
 COPY server/ .
 RUN dotnet publish -c Release -o out
-
-# Install Git
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 # Stage 3: Create the final image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
