@@ -12,7 +12,7 @@ WORKDIR /app/server
 COPY server/*.csproj ./
 RUN dotnet restore
 COPY server/ .
-RUN dotnet build -c Release -o out
+RUN dotnet publish -c Release -o out
 
 # Stage 3: Create the final image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
