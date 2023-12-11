@@ -1,6 +1,15 @@
-# Image reference for the GitPod workspace
 image:
-  file: .gitpod.dockerfile
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Restore & Build
+    init: | 
+      cd ./server
+      dotnet dev-certs https 
+      dotnet restore
+      dotnet build
+  - name: Run
+    command: dotnet run
 
 # Ports to be exposed in the GitPod environment
 ports:
@@ -11,3 +20,4 @@ ports:
 vscode:
   extensions:
     - angular.ng-template
+    - muhammad-sammy.csharp
