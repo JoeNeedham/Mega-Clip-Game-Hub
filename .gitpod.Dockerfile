@@ -7,7 +7,7 @@ COPY client/ .
 RUN npm run build --prod
 
 # Stage 2: Build .NET application
-FROM gitpod/workspace-dotnet:7.0
+FROM gitpod/workspace-dotnet
 
 # Stage 3: Create the final image
 COPY --from=angular-build /app/client/dist ./wwwroot
