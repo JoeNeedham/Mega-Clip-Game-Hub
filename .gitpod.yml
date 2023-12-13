@@ -10,17 +10,18 @@ tasks:
       dotnet build
   - name: Run Angular client
     init: | 
-      cd ../client
+      cd ../client/
       npm install -g @angular/cli
       ng serve --disable-host-check
   - name: Run .NET server
     command: / 
-      cd ./server
+      cd ../server/
       dotnet run
 
 # Ports to be exposed in the GitPod environment
 ports:
   - port: 4200
+  - port: 5000
   - port: 5001
 
 # Extensions to be installed in the GitPod environment
