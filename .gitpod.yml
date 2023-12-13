@@ -8,13 +8,20 @@ tasks:
       dotnet dev-certs https 
       dotnet restore
       dotnet build
-  - name: Run
-    command: dotnet run
+  - name: Run Angular client
+    init: | 
+      cd ../client
+      npm install -g @angular/cli
+      ng serve --disable-host-check
+  - name: Run .NET server
+    command: / 
+      cd ./server
+      dotnet run
 
 # Ports to be exposed in the GitPod environment
 ports:
   - port: 4200
-  - port: 5000
+  - port: 5001
 
 # Extensions to be installed in the GitPod environment
 vscode:

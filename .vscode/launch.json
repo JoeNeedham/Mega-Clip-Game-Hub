@@ -15,6 +15,32 @@
       "request": "launch",
       "preLaunchTask": "npm: test",
       "url": "http://localhost:9876/debug.html"
+    },
+    {
+      "name": ".NET Core Launch (web)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/bin/Debug/net6.0/GitPodDotNet.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+          "action": "openExternally",
+          "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+          "ASPNETCORE_ENVIRONMENT": "Development",
+          "urls": "http://0.0.0.0:5001"
+      },
+      "sourceFileMap": {
+          "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
+        "name": ".NET Core Attach",
+        "type": "coreclr",
+        "request": "attach"
     }
   ]
 }
