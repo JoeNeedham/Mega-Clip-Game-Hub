@@ -3,19 +3,19 @@ image:
 
 tasks:
   - name: Restore & Build
-    init: | 
+    init: |
       cd ./server
       dotnet dev-certs https 
       dotnet restore
       dotnet build
   - name: Run Angular client
-    init: | 
-      cd ../client/
+    init: |
+      cd ./client
       npm install -g @angular/cli
       ng serve --disable-host-check
   - name: Run .NET server
-    command: / 
-      cd ../server/
+    command: /
+      cd ./server
       dotnet run
 
 # Ports to be exposed in the GitPod environment
